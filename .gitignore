@@ -1,0 +1,29 @@
+# Compiled binaries and executables
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+sharing-vision-backend
+sharing-vision-backend.exe
+
+# Dependency directories (typically handled by go mod)
+vendor/
+
+# Personal environment configurations containing credentials
+.env
+.env.local
+
+# IDE and Editor configurations
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary and log files
+*.log
+tmp/
+scratch/
