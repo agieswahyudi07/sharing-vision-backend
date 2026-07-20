@@ -34,6 +34,23 @@ This is the backend service for the Sharing Vision recruitment test, built using
 
 ---
 
+## Running with Docker Compose
+
+You can run both the MySQL 8.4 database and the Go backend service using Docker Compose:
+
+```bash
+docker compose up -d --build
+```
+
+- **MySQL Database**: Exposed on port `3306`.
+- **Go Backend API**: Exposed on port `8080`.
+- To stop the services:
+  ```bash
+  docker compose down
+  ```
+
+---
+
 ## API Endpoint Reference
 
 | Method | Endpoint | Request Body | Description |
