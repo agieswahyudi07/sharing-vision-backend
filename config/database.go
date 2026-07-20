@@ -35,8 +35,13 @@ func InitDB() {
 	}
 
 	// 1. Connect to MySQL server (without DB name) to create database if not exists
-	dsnWithoutDB := fmt.Sprintf("%s:%s@tcp(%s:%s)/?charset=utf8mb4&parseTime=True&loc=Local",
-		dbUser, dbPassword, dbHost, dbPort)
+	tlsParamRaw := ""
+	if dbHost != "127.0.0.1" && dbHost != "localhost" {
+		tlsParamRaw = "&tls=skip-verify"
+	}
+
+	dsnWithoutDB := fmt.Sprintf("%s:%s@tcp(%s:%s)/?charset=utf8mb4&parseTime=True&loc=Local%s",
+		dbUser, dbPassword, dbHost, dbPort, tlsParamRaw)
 
 	rawDB, err := sql.Open("mysql", dsnWithoutDB)
 	if err != nil {
@@ -55,8 +60,13 @@ func InitDB() {
 	}
 
 	// 2. Connect to the specific database using GORM
-	dsnWithDB := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-		dbUser, dbPassword, dbHost, dbPort, dbName)
+	tlsParam := ""
+	if dbHost != "127.0.0.1" && dbHost != "localhost" {
+		tlsParam = "&tls=skip-verify"
+	}
+
+	dsnWithDB := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local%s",
+		dbUser, dbPassword, dbHost, dbPort, dbName, tlsParam)
 
 	// Configure logging
 	newLogger := glogger.New(
